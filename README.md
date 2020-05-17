@@ -1,2 +1,2 @@
 # practical-common-lisp
-Practical Common Lisp
+[Practical Common Lisp](http://www.gigamonkeys.com/book/)
