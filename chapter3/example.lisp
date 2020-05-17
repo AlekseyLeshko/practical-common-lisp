@@ -2,3 +2,9 @@
 (print (list :a 1 :b 2 :c 3))
 (print (getf (list :a 1 :b 2 :c 3) :a))
 (print (getf (list :a 1 :b 2 :c 3) :b))
+
+(format t "~%~s~%" "Dixie Chicks")
+(format t "~%~a~%" "Dixie Chicks")
+(format t "~%~a~%" :title)
+(format t "~a:~10t~a~%~%" :artist "Dixie Chicks")
+(format t "~{~a:  ~a~%~}~%" (list :a 1 :b 2))
