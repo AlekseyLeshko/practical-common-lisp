@@ -21,3 +21,9 @@
 (add-record (make-cd "Test-title" "Test" 6.5 t))
 (print "====")
 (print *db*)
+
+(defun dump-db ()
+  (dolist (cd *db*)
+    (format t "~{~a:~10t~a~%~}~%" cd)))
+
+(dump-db)
