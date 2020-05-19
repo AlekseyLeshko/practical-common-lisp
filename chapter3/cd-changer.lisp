@@ -74,3 +74,34 @@
 
 (load-db "test.txt")
 (dump-db)
+
+(defun select (select-fn)
+  (remove-if-not select-fn *db*))
+
+; (defparameter *newString* "artist")
+; (print (getf (nth 1 *db*) (*newString*)))
+; (defun get-x (field)
+  ; (getf cd 1))
+(defun get-artist (cd) (getf cd :artist))
+(defun get-ripped (cd) (getf cd :ripped))
+
+(defun select-by-artist (artist)
+  (remove-if-not
+    #'(lambda (cd) (equal (get-artist cd) artist))
+    *db*))
+
+; (print (remove-if-not
+  ; #'(lambda (cd) (equal (getf cd :artist) "Dixie Chicks")) *db*))
+
+; (print (select-by-artist "Dixie Chicks"))
+
+(defun artist-selector (artist)
+  #'(lambda (cd) (equal (get-artist cd) artist)))
+
+(print
+  (select (artist-selector "Dixie Chicks")))
+
+; (print
+  ; (select #'(lambda (cd) (equal (get-artist cd) "Dixie Chicks"))))
+; (print
+  ; (select #' (lambda (cd) (equal (get-ripped cd) T))))
