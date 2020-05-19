@@ -31,3 +31,12 @@
 
 (print (foo1 :a 1 :b 2))
 (print (foo1 :c 1 :a 5))
+
+
+(let ((plist (list 'a 'b 'c 'd)))
+  (getf plist 'c))
+
+
+(print "===")
+(defmacro backwards (expr) (reverse expr))
+(print (backwards ("~%hello, world" t format)))

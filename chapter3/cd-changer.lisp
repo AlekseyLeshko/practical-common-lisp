@@ -120,3 +120,20 @@
 
 (print (select (where :artist "Dixie Chicks")))
 (print (select (where :rating 10 :ripped nil)))
+
+(defun update (selector-fn &key title artist rating (ripped nil ripped-p))
+  (setf *db*
+        (mapcar
+         #'(lambda (row)
+             (when (funcall selector-fn row)
+               (if title    (setf (getf row :title) title))
+               (if artist   (setf (getf row :artist) artist))
+               (if rating   (setf (getf row :rating) rating))
+               (if ripped-p (setf (getf row :ripped) ripped)))
+             row) *db*)))
+
+(update (where :artist "Dixie Chicks") :rating 11)
+(print (select (where :artist "Dixie Chicks")))
+
+(defun delete-rows (selector-fn)
+  (setf *db* (remove-if selector-fn *db*)))
