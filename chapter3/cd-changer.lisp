@@ -29,7 +29,7 @@
   (format t "====~%~%")
 )
 
-(dump-db)
+; (dump-db)
 
 ; (defun dump-db-2 ()
   ; (format t "====~%")
@@ -79,9 +79,12 @@
   (remove-if-not select-fn *db*))
 
 ; (defparameter *newString* "artist")
-; (print (getf (nth 1 *db*) (*newString*)))
+; (print (find-symbol "artist"))
+; (print (getf (nth 1 *db*) (find-symbol *newString*)))
 ; (defun get-x (field)
   ; (getf cd 1))
+
+
 (defun get-artist (cd) (getf cd :artist))
 (defun get-ripped (cd) (getf cd :ripped))
 
@@ -105,3 +108,15 @@
   ; (select #'(lambda (cd) (equal (get-artist cd) "Dixie Chicks"))))
 ; (print
   ; (select #' (lambda (cd) (equal (get-ripped cd) T))))
+
+(defun where (&key title artist rating (ripped nil ripped-p))
+  #'(lambda (cd)
+    (and
+      (if title (equal (getf cd :title) title) t)
+      (if artist (equal (getf cd :artist) artist) t)
+      (if rating (equal (getf cd :rating) rating) t)
+      (if ripped-p (equal (getf cd :ripped) ripped) t))))
+
+
+(print (select (where :artist "Dixie Chicks")))
+(print (select (where :rating 10 :ripped nil)))
